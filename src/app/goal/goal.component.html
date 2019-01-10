@@ -1,0 +1,23 @@
+<div class="container">
+<p>
+  goal works!
+</p>
+    <div class="row" *ngFor='let goals of goal; let i = index'>
+      <div class="row">
+      <li appStrikethrough>{{goals.id + " " + goals.name}}</li>
+      <h4  id="{{index}}" appStrikethrough>{{goals.name}} due on {{goals.completeDate|date|uppercase}}</h4>
+      <!-- <p  id="{{i}}">{{goals.name}} due on {{goals.completeDate|date: "fullDate"}}</p> -->
+      <button class="btn btn-primary" (click)='toogleDetails(i)'>Toogle Details</button>
+      </div>
+      <div class="row" *ngIf="goals.showDescription">
+      <app-goal-details [goal]= 'goals'(isComplete)= 'deleteGoal($event,i)'></app-goal-details>
+    </div>
+  <!-- <p>{{goals.description}}</p> -->
+</div>
+<p *ngIf='goal.length > 5'>You have too many goals</p>
+
+<div class="row">
+     <app-goal-form (addGoal)="addNewGoal($event)"></app-goal-form>
+ </div>
+
+</div>
